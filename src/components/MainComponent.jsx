@@ -4,9 +4,9 @@ import HeaderMain from "./HeaderMain";
 
 
 
-class MainComponent extends React.Component {
+const MainComponent = () => {
 
-	logIn = () => {
+	const logIn = () => {
 		let log = document.getElementById("login").value;
 		let pass = document.getElementById("password").value;
 
@@ -14,7 +14,7 @@ class MainComponent extends React.Component {
 			if (pass === "n") {
 				// сверяем и ложим в куки
 				// если в куки чтото есть то авторизированые
-				this.setCookie(log, pass);
+				setCookie(log, pass);
 				if (document.cookie !== "") {
 					document.location.href = "/home";
 					// 	 this.deleteCookie(log);
@@ -25,7 +25,7 @@ class MainComponent extends React.Component {
 		}
 	}
 
-	setCookie = (name, value) => {
+	const setCookie = (name, value) => {
 		let updatedCookie = name + "=" + value;
 		document.cookie = updatedCookie;
 	}
@@ -34,7 +34,7 @@ class MainComponent extends React.Component {
 	// 	this.setCookie(name, "", { 'max-age': -1 });
 	// }
 
-	showingLogin = () => {
+	const showingLogin = () => {
 		if (document.cookie === "") {
 			return (
 				<div>
@@ -48,26 +48,25 @@ class MainComponent extends React.Component {
 							<input type="text" id="password" />
 						</li>
 					</ul>
-					<button onClick={this.logIn} >LogIn</button>
-					{/* <a href="/home">Home</a> */}
+					<button onClick={logIn} >LogIn</button>
+					<a href="/home">Home</a>
 				</div>
 			)
 		}
 	}
 
 
-	render() {
-		return (
-			<BrowserRouter>
+
+	return (
+		<BrowserRouter>
+			<div>
+				{showingLogin()}
 				<div>
-					{this.showingLogin()}
-					<div>
-						<PrivateRoute path="/home" component={HeaderMain} />
-					</div>
+					<PrivateRoute path="/home" component={HeaderMain} />
 				</div>
-			</BrowserRouter>
-		);
-	}
+			</div>
+		</BrowserRouter>
+	);
 };
 
 
