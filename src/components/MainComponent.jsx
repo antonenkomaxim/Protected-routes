@@ -1,68 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import HeaderMain from "./HeaderMain";
+import Cookies from 'js-cookie';
+import TwoHeader from "./TwoHeader";
+import Footer from "./Footer";
 
 
 
 const MainComponent = () => {
+	const [status, setStatus] = useState(true);
+	const [pass, setPass] = useState("");
+	const [login, setLogin] = useState("");
 
 	const logIn = () => {
-		let log = document.getElementById("login").value;
-		let pass = document.getElementById("password").value;
-
-		if (log === "m") {
-			if (pass === "n") {
-				// сверяем и ложим в куки
-				// если в куки чтото есть то авторизированые
-				setCookie(log, pass);
-				if (document.cookie !== "") {
-					document.location.href = "/home";
-					// 	 this.deleteCookie(log);
-				}
+		Cookies.set(login, pass);
+		if (Cookies.get(login)) {
+			if (Cookies.get(login) === pass) {
+				setStatus(false);
+				document.location.href = "/home";
 			}
 		} else {
 			document.location.href = "/";
 		}
 	}
 
-	const setCookie = (name, value) => {
-		let updatedCookie = name + "=" + value;
-		document.cookie = updatedCookie;
-	}
-
-	// deleteCookie = (name) => {
-	// 	this.setCookie(name, "", { 'max-age': -1 });
-	// }
 
 	const showingLogin = () => {
-		if (document.cookie === "") {
-			return (
+		return (
+			<div>
 				<div>
-					<ul>
-						<li>
-							<p>Login</p>
-							<input type="text" id="login" />
-						</li>
-						<li>
-							<p>Password</p>
-							<input type="text" id="password" />
-						</li>
-					</ul>
+					<div >
+						<h3>Авторизация</h3>
+						<ul>
+							<li>
+								<p>Login</p>
+								<input type="text" id="login" onChange={(e) => { setLogin(e.target.value) }} />
+							</li>
+							<li>
+								<p>Password</p>
+								<input type="text" id="password" onChange={(e) => { setPass(e.target.value) }} />
+							</li>
+						</ul>
+					</div>
 					<button onClick={logIn} >LogIn</button>
-					<a href="/home">Home</a>
 				</div>
-			)
-		}
+			</div>
+		)
 	}
-
 
 
 	return (
 		<BrowserRouter>
 			<div>
-				{showingLogin()}
+				{document.cookie === "" && showingLogin()}
 				<div>
 					<PrivateRoute path="/home" component={HeaderMain} />
+					<Route path="/home/two_header" component={TwoHeader} />
+					<Route path="/home/footer" component={Footer} />
 				</div>
 			</div>
 		</BrowserRouter>

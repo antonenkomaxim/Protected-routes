@@ -14,7 +14,6 @@ const OneHeader = () => {
 				<h1>One Header</h1>
 				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus distinctio odio optio dolore. Quae explicabo a inventore, optio debitis voluptate perspiciatis nam, rerum odio impedit iusto ad quam ut doloribus.</p>
 			</div>
-
 		</div>
 	);
 };
