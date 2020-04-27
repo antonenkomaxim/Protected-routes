@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import MainComponent from './components/MainComponent';
+import SecondMainComponent from './components/SecondMainComponent';
 
 class App extends Component {
 	render() {
 		return (
-			<MainComponent />
+			<SecondMainComponent />
 		);
 	}
 }
