@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 
 const Nav = () => {
 	return (
-		<div style={{ width: "220px", background: "#9fb5e2" }}>
+		<div >
 			<ul>
-				<li><Link to="/public">Public Page</Link></li>
-				<li><Link to="/protected">Protected Page</Link></li>
+				<li><Link to="/login">Login</Link></li>
+				<li><Link to="/">Protected Page</Link></li>
+				<li><Link to="/help">Help</Link></li>
 			</ul>
 		</div>
 	);
